@@ -41,4 +41,31 @@ public class CategoryDAOImpl implements CategoryDAO{
         }
         return false;
     }
+
+    @Override
+    public Category findById(Integer id) {
+        Session session = sessionFactory.openSession();
+        try {
+            return session.get(Category.class,id);
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+    @Override
+    public void delete(Integer id) {
+        Session session = sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            session.delete(findById(id));
+            session.getTransaction().commit();
+        } catch (Exception e){
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+    }
 }

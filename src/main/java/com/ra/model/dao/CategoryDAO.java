@@ -7,4 +7,6 @@ import java.util.List;
 public interface CategoryDAO {
     List<Category> getAll();
     Boolean saveOrUpdate(Category category);
+    Category findById(Integer id);
+    void delete(Integer id);
 }
