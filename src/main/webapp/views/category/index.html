@@ -16,16 +16,33 @@
     <a class="nav-link active" href="#">Quản lý danh mục</a>
     <a class="nav-link" href="/category">Quản lý sản phẩm</a>
 </nav>
-<div class="jumbotron">
-    <h1 class="display-3">Home</h1>
-    <p class="lead">Jumbo helper text</p>
-    <hr class="my-2">
-    <p>More info</p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Jumbo action name</a>
-    </p>
+
+<div th:if="${success != null}" class="alert alert-primary" role="alert">
+    <strong th:text="${success}"></strong>
 </div>
 
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="item : ${categories}">
+            <td scope="row" th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.status ? 'Hiện' : 'Ân'}"></td>
+            <th>
+                <a href="" class="btn btn-primary">Edit</a>
+                <a href="" class="btn btn-danger">Delete</a>
+            </th>
+        </tr>
+    </tbody>
+</table>
+<a href="/add-category" class="btn btn-success">Thêm mới danh mục</a>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

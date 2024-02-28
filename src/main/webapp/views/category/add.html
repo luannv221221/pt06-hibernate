@@ -16,15 +16,31 @@
     <a class="nav-link active" href="#">Quản lý danh mục</a>
     <a class="nav-link" href="/category">Quản lý sản phẩm</a>
 </nav>
-<div class="jumbotron">
-    <h1 class="display-3">Home</h1>
-    <p class="lead">Jumbo helper text</p>
-    <hr class="my-2">
-    <p>More info</p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Jumbo action name</a>
-    </p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <form th:object="${category}" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">CategoryName</label>
+                    <input type="text" th:field="*{name}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+                </div>
+                <div class="form-group">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" th:field="*{status}"   value="0"> Ẩn
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" th:field="*{status}"  value="1"> Hiện
+                    </label>
+                </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Thêm Mới</button>
+            </form>
+        </div>
+    </div>
 </div>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

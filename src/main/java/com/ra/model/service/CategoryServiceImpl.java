@@ -15,4 +15,8 @@ public class CategoryServiceImpl implements CategoryService{
     public List<Category> getAll() {
         return categoryDAO.getAll();
     }
+    @Override
+    public Boolean saveOrUpdate(Category category) {
+        return categoryDAO.saveOrUpdate(category);
+    }
 }

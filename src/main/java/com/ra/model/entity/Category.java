@@ -12,7 +12,7 @@ public class Category {
     @Column(name = "name")
     private String name;
     @Column(name = "status")
-    private Boolean status;
+    private Boolean status = true;
 
     public Category() {
     }

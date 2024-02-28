@@ -25,4 +25,20 @@ public class CategoryDAOImpl implements CategoryDAO{
         }
         return categories;
     }
+
+    @Override
+    public Boolean saveOrUpdate(Category category) {
+        Session session = sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            session.saveOrUpdate(category);
+            session.getTransaction().commit();
+            return true;
+        } catch (Exception exception){
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+        return false;
+    }
 }
