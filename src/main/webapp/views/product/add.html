@@ -13,18 +13,40 @@
 </head>
 <body>
 <nav class="nav justify-content-center">
-    <a class="nav-link active" href="/category">Quản lý danh mục</a>
-    <a class="nav-link" href="/product">Quản lý sản phẩm</a>
+    <a class="nav-link active" href="#">Quản lý danh mục</a>
+    <a class="nav-link" href="/category">Quản lý sản phẩm</a>
 </nav>
-<div class="jumbotron">
-    <h1 class="display-3">Home</h1>
-    <p class="lead">Jumbo helper text</p>
-    <hr class="my-2">
-    <p>More info</p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Jumbo action name</a>
-    </p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <form method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">ProductName</label>
+                    <input type="text"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+                </div>
+                <div class="form-group">
+                    <label >Price</label>
+                    <input type="text"  class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Image</label>
+                    <input type="file"  class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="">Category</label>
+                    <select class="form-control" name="" id="">
+                        <option>Áo</option>
+                        <option>Quần</option>
+                        <option>Mũ</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Thêm Mới</button>
+            </form>
+        </div>
+    </div>
 </div>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

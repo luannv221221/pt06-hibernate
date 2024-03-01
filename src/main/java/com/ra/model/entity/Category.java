@@ -1,6 +1,7 @@
 package com.ra.model.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "categories")
@@ -13,7 +14,8 @@ public class Category {
     private String name;
     @Column(name = "status")
     private Boolean status = true;
-
+    @OneToMany(mappedBy = "category")
+    private Set<Product> products;
     public Category() {
     }
 
@@ -39,5 +41,13 @@ public class Category {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }
