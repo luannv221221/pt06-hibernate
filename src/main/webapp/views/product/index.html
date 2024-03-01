@@ -37,7 +37,9 @@
             <td scope="row" th:text="${item.id}"></td>
             <td th:text="${item.name}"></td>
             <td th:text="${item.price}"></td>
-            <td th:text="${item.image}"></td>
+            <td>
+                <img th:src="@{|uploads/${item.image}|}">
+            </td>
             <td th:text="${item.category.name}"></td>
             <th>
                 <a th:href="@{/edit-category/{id}(id=${item.id})}" class="btn btn-primary">Edit</a>

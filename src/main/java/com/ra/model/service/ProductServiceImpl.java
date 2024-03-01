@@ -17,7 +17,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Boolean saveOrUpdate(Product product) {
-        return null;
+        return productDAO.saveOrUpdate(product);
     }
 
     @Override
