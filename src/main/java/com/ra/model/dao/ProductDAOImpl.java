@@ -46,11 +46,29 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public Product findById(Integer id) {
+        Session session = sessionFactory.openSession();
+        try {
+            Product product = session.get(Product.class,id);
+            return product;
+        } catch (Exception exception){
+
+        } finally {
+            session.close();
+        }
         return null;
     }
 
     @Override
     public void delete(Integer id) {
-
+        Session session = sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            session.delete(findById(id));
+            session.getTransaction().commit();
+        } catch (Exception e){
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
     }
 }

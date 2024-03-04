@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -58,6 +55,43 @@ public class ProductController {
         // thêm sản phẩm
         System.out.println(product.toString());
         productService.saveOrUpdate(product);
+        return "redirect:/product";
+    }
+    @GetMapping("/edit-product/{id}")
+    public String edit(@PathVariable("id") Integer id,Model model){
+        List<Category> categories = categoryService.getAll();
+        Product product = productService.findById(id);
+        model.addAttribute("product",product);
+        model.addAttribute("categories",categories);
+        return "product/edit";
+    }
+    @PostMapping("/edit-product/{id}")
+    public String update(
+            @PathVariable("id") Integer id,
+            @ModelAttribute("product") Product product,
+            @RequestParam(value = "fileImage",required = false) MultipartFile file ){
+
+        // upload file
+        String fileName = file.getOriginalFilename();
+        assert fileName != null;
+        if(!fileName.isEmpty()){
+            File destination = new File(path+"/"+fileName);
+            try {
+                Files.write(destination.toPath(),file.getBytes(), StandardOpenOption.CREATE);
+                product.setImage(fileName);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if(productService.saveOrUpdate(product)){
+            return "redirect:/product";
+        }
+        return "redirect:/edit-product/"+id;
+    }
+
+    @GetMapping("/delete-product/{id}")
+    public String delete(@PathVariable Integer id){
+        productService.delete(id);
         return "redirect:/product";
     }
 }

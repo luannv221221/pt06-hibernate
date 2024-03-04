@@ -38,12 +38,12 @@
             <td th:text="${item.name}"></td>
             <td th:text="${item.price}"></td>
             <td>
-                <img th:src="@{|uploads/${item.image}|}">
+                <img th:src="@{|/uploads/${item.image}|}" width="150px">
             </td>
             <td th:text="${item.category.name}"></td>
             <th>
-                <a th:href="@{/edit-category/{id}(id=${item.id})}" class="btn btn-primary">Edit</a>
-                <a th:href="@{/delete-category/{id}(id=${item.id})}" onclick="return confirm('Chawcs chans ko')" class="btn btn-danger">Delete</a>
+                <a th:href="@{/edit-product/{id}(id=${item.id})}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/delete-product/{id}(id=${item.id})}" onclick="return confirm('Chawcs chans ko')" class="btn btn-danger">Delete</a>
             </th>
         </tr>
     </tbody>

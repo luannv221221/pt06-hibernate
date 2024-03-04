@@ -20,22 +20,29 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-6">
-      <form th:object="${category}" method="post">
+      <form action="" method="post" th:object="${product}" enctype="multipart/form-data">
         <div class="form-group">
-          <label for="exampleInputEmail1">CategoryName</label>
-          <input type="text" th:field="*{name}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+          <label>ProductName</label>
+          <input type="text" class="form-control" th:field="*{name}" >
         </div>
         <div class="form-group">
-          <div class="form-check form-check-inline">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" th:field="*{status}"   value="0"> Ẩn
-            </label>
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" th:field="*{status}"  value="1"> Hiện
-            </label>
-          </div>
+          <label >Price</label>
+          <input type="text"  class="form-control" th:field="*{price}" />
         </div>
-        <button type="submit" class="btn btn-primary">Cap nhat</button>
+        <div class="form-group">
+          <label>Image</label>
+          <input type="file" th:name="fileImage" class="form-control" />
+          <img th:src="@{|/uploads/${product.image}|}" width="200px">
+        </div>
+        <input type="hidden" th:field="*{image}" class="form-control" />
+
+        <div class="form-group">
+          <label for="">Category</label>
+          <select class="form-control" th:field="*{category.id}" id="">
+            <option th:each="item : ${categories}" th:value="${item.id}" th:text="${item.name}"></option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
       </form>
     </div>
   </div>

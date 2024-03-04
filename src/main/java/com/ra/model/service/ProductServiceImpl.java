@@ -22,11 +22,11 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product findById(Integer id) {
-        return null;
+        return productDAO.findById(id);
     }
 
     @Override
     public void delete(Integer id) {
-
+        productDAO.delete(id);
     }
 }
