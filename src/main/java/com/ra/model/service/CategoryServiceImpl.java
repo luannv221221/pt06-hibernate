@@ -29,4 +29,14 @@ public class CategoryServiceImpl implements CategoryService{
     public void delete(Integer id) {
         categoryDAO.delete(id);
     }
+
+    @Override
+    public Boolean checkNameExits(String name) {
+        return categoryDAO.checkNameExits(name);
+    }
+
+    @Override
+    public List<Category> pagination(Integer noPage,Integer limit) {
+        return categoryDAO.pagination(noPage,limit);
+    }
 }

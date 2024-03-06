@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 @Repository
@@ -35,6 +36,7 @@ public class CategoryDAOImpl implements CategoryDAO{
             session.getTransaction().commit();
             return true;
         } catch (Exception exception){
+            exception.printStackTrace();
             session.getTransaction().rollback();
         } finally {
             session.close();
@@ -67,5 +69,41 @@ public class CategoryDAOImpl implements CategoryDAO{
         } finally {
             session.close();
         }
+    }
+
+    @Override
+    public Boolean checkNameExits(String name) {
+        Session session = sessionFactory.openSession();
+        try {
+            String sql = "SELECT C.name FROM Category C WHERE C.name = :name";
+            Query query = session.createQuery(sql);
+            query.setParameter("name",name);
+            if(!query.getResultList().isEmpty()){
+                return true;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return false;
+    }
+
+    @Override
+    public List<Category> pagination(Integer noPage,Integer limit) {
+        List<Category> categories = new ArrayList<>();
+        Session session = sessionFactory.openSession();
+        try {
+            Query query = session.createQuery("from Category");
+            query.setFirstResult((noPage-1)*limit);
+            query.setMaxResults(limit);
+            categories = query.getResultList();
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return categories;
+
     }
 }

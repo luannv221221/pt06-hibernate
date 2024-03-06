@@ -1,6 +1,12 @@
 package com.ra.model.entity;
 
+import com.ra.model.entity.validator.Unique;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -11,6 +17,8 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "name")
+    @NotBlank(message = "Tên không được rỗng")
+//    @Unique
     private String name;
     @Column(name = "status")
     private Boolean status = true;

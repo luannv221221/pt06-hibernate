@@ -9,4 +9,6 @@ public interface CategoryDAO {
     Boolean saveOrUpdate(Category category);
     Category findById(Integer id);
     void delete(Integer id);
+    Boolean checkNameExits(String name);
+    List<Category> pagination(Integer noPage,Integer limit);
 }
