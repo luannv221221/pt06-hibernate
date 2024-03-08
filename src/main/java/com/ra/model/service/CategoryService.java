@@ -12,4 +12,6 @@ public interface CategoryService{
     void delete(Integer id);
     Boolean checkNameExits(String string);
     List<Category> pagination(Integer noPage,Integer limit);
+    List<Category> search(Integer noPage,Integer limit,String name);
+    int getTotalPage();
 }

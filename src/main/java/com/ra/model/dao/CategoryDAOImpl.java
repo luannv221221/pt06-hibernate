@@ -13,6 +13,7 @@ import java.util.List;
 public class CategoryDAOImpl implements CategoryDAO{
     @Autowired
     SessionFactory sessionFactory;
+    private int totalPage;
     @Override
     public List<Category> getAll() {
         List<Category> categories = new ArrayList<>();
@@ -95,6 +96,7 @@ public class CategoryDAOImpl implements CategoryDAO{
         Session session = sessionFactory.openSession();
         try {
             Query query = session.createQuery("from Category");
+            this.totalPage = query.getResultList().size();
             query.setFirstResult((noPage-1)*limit);
             query.setMaxResults(limit);
             categories = query.getResultList();
@@ -105,5 +107,33 @@ public class CategoryDAOImpl implements CategoryDAO{
         }
         return categories;
 
+    }
+
+    @Override
+    public List<Category> search(Integer noPage,Integer limit,String name) {
+        List<Category> categories = new ArrayList<>();
+        Session session = sessionFactory.openSession();
+        try {
+            String hql = "from Category where name like :keyword";
+
+            Query query = session.createQuery(hql);
+            query.setParameter("keyword","%"+name+"%");
+            this.totalPage = query.getResultList().size();
+            query.setFirstResult((noPage-1)*limit);
+            query.setMaxResults(limit);
+            categories = query.getResultList();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return categories;
+
+    }
+
+    @Override
+    public int getTotalPage() {
+        return totalPage;
     }
 }

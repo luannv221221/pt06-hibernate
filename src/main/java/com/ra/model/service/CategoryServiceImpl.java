@@ -39,4 +39,14 @@ public class CategoryServiceImpl implements CategoryService{
     public List<Category> pagination(Integer noPage,Integer limit) {
         return categoryDAO.pagination(noPage,limit);
     }
+
+    @Override
+    public List<Category> search(Integer noPage,Integer limit,String name) {
+        return categoryDAO.search(noPage,limit,name);
+    }
+
+    @Override
+    public int getTotalPage() {
+        return categoryDAO.getTotalPage();
+    }
 }

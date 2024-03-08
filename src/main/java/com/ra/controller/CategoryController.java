@@ -21,11 +21,20 @@ public class CategoryController {
     @GetMapping("/category")
     public String index(Model model,
                         @RequestParam(value = "page",defaultValue = "1") Integer noPage,
-                        @RequestParam(value = "limit",defaultValue = "2") Integer limit){
-        List<Category> categories = categoryService.pagination(noPage,limit);
+                        @RequestParam(value = "limit",defaultValue = "4") Integer limit,
+                        @RequestParam(value = "keyword",required = false) String keyword){
+        List<Category> categories = new ArrayList<>();
+
+        if(keyword != null){
+             categories = categoryService.search(noPage,limit,keyword);
+             model.addAttribute("keyword",keyword);
+        } else {
+            categories = categoryService.pagination(noPage,limit);
+        }
+        float totalPage = (float) categoryService.getTotalPage() / limit;
         model.addAttribute("categories",categories);
-        float totalPage = (float) categoryService.getAll().size() / limit;
         model.addAttribute("totalPage",Math.ceil(totalPage));
+        model.addAttribute("curentpage",noPage);
         return "category/index";
     }
     @GetMapping("/add-category")
